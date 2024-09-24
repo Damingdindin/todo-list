@@ -41,13 +41,8 @@ git clone https://github.com/your-repo/todolist.git
 cd todolist
 
 
-### 2. 安裝所需的依賴
-運行以下命令來安裝專案所需的 NuGet 包：
-
-```bash
-dotnet restore
 ```
-### 3. 設置 MySQL 資料庫
+### 2. 設置 MySQL 資料庫
 使用以下 SQL 語法在你的 MySQL 資料庫中創建所需的資料表：
 ```sql
 CREATE DATABASE todolist;
@@ -60,7 +55,7 @@ CREATE TABLE todos (
     Priority ENUM('Low', 'Medium', 'High') NOT NULL
 );
 ```
-### 4. 更新 appsettings.json
+### 3. 更新 appsettings.json
 請確保在 appsettings.json 中配置了正確的 MySQL 資料庫連接字串。如下所示：
 ```json
 {
@@ -69,7 +64,7 @@ CREATE TABLE todos (
   }
 }
 ```
-### 5.運行專案
+### 4.運行專案
 使用以下指令運行專案：
 ```bash
 dotnet build
