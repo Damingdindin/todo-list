@@ -39,3 +39,23 @@
 ```bash
 git clone https://github.com/your-repo/todolist.git
 cd todolist
+
+
+### 2. 安裝所需的依賴
+運行以下命令來安裝專案所需的 NuGet 包：
+
+```bash
+dotnet restore
+### 3. 設置 MySQL 資料庫
+使用以下 SQL 語法在你的 MySQL 資料庫中創建所需的資料表：
+
+```sql
+CREATE DATABASE todolist;
+USE todolist;
+
+CREATE TABLE todos (
+    Id INT AUTO_INCREMENT PRIMARY KEY,
+    Task VARCHAR(255) NOT NULL,
+    IsCompleted BOOLEAN DEFAULT FALSE,
+    Priority ENUM('Low', 'Medium', 'High') NOT NULL
+);
