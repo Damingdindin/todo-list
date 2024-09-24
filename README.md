@@ -13,7 +13,9 @@ cd todolist
 
 
 ###2. 設置資料庫
+
 使用 MySQL Workbench 或命令行運行以下 SQL 來創建資料庫：
+```bash
 CREATE DATABASE todolist;
 USE todolist;
 
@@ -27,5 +29,6 @@ CREATE TABLE todos (
 在 appsettings.json 中更新你的 MySQL 資料庫連接字串。
 
 ###4. 運行應用
+```bash
 dotnet build
 dotnet run
