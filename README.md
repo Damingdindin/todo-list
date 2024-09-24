@@ -68,7 +68,8 @@ CREATE TABLE todos (
   }
 }
 
-### 5.
+### 5.運行專案
+使用以下指令運行專案：
 ```bash
 dotnet build
 dotnet run
