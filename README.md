@@ -35,7 +35,7 @@
 
 首先，複製專案到你的本地端：
 
-```bash
+
 git clone https://github.com/your-repo/todolist.git
 cd todolist
 
@@ -45,9 +45,9 @@ cd todolist
 
 ```bash
 dotnet restore
+```
 ### 3. 設置 MySQL 資料庫
 使用以下 SQL 語法在你的 MySQL 資料庫中創建所需的資料表：
-```
 ```sql
 CREATE DATABASE todolist;
 USE todolist;
