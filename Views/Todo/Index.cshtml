@@ -1,0 +1,86 @@
+@model IEnumerable<todolist.Models.Todo>
+@using todolist.Helpers
+
+<h2>Todo List</h2>
+
+<form method="post" action="/Todo/AddTask">
+    <input type="text" name="task" placeholder="新增任務" required />
+    <select name="priority">
+        <option value="Low">低</option>
+        <option value="Medium">中</option>
+        <option value="High">高</option>
+    </select>
+    <button type="submit">新增</button>
+</form>
+
+<input type="text" id="search" placeholder="搜索任務..." />
+<select id="filter">
+    <option value="all">所有任務</option>
+    <option value="completed">已完成</option>
+    <option value="pending">未完成</option>
+</select>
+
+<ul id="todo-list">
+    @foreach (var todo in Model)
+    {
+        <li class="todo-item">
+            <span>@todo.Task</span>
+            <span style="color: @PriorityHelper.GetPriorityColor(@todo.Priority);">(@todo.Priority)</span>
+            @if (todo.IsCompleted)
+            {
+                <span style="color: green;">(已完成)</span>
+            }
+            else
+            {
+                <span style="color: red;">(未完成)</span>
+                <button class="complete-task" data-id="@todo.Id">標記為完成</button>
+            }
+        </li>
+    }
+</ul>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // 防止表單默認提交，使用 AJAX 發送請求
+        $('form').submit(function(e) {
+            e.preventDefault();
+            var task = $('input[name=task]').val();
+            var priority = $('select[name=priority]').val();
+            $.post('/Todo/AddTask', { task: task, priority: priority }, function() {
+                location.reload(); // 在任務新增後刷新頁面
+            });
+        });
+
+        // 處理點擊標記為完成按鈕的事件
+        $('.complete-task').click(function() {
+            var id = $(this).data('id');
+            $.post('/Todo/MarkAsCompleted', { id: id }, function() {
+                location.reload(); // 在標記為完成後刷新頁面
+            });
+        });
+
+        // 搜索功能
+        $('#search').on('keyup', function() {
+            var value = $(this).val().toLowerCase();
+            $('#todo-list .todo-item').filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+            });
+        });
+
+        // 篩選功能
+        $('#filter').change(function() {
+            var filter = $(this).val();
+            $('#todo-list .todo-item').each(function() {
+                var isCompleted = $(this).find('span:contains("已完成")').length > 0;
+                if (filter === 'completed' && !isCompleted) {
+                    $(this).hide();
+                } else if (filter === 'pending' && isCompleted) {
+                    $(this).hide();
+                } else {
+                    $(this).show();
+                }
+            });
+        });
+    });
+</script>
