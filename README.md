@@ -59,3 +59,16 @@ CREATE TABLE todos (
     IsCompleted BOOLEAN DEFAULT FALSE,
     Priority ENUM('Low', 'Medium', 'High') NOT NULL
 );
+### 4. 更新 appsettings.json
+請確保在 appsettings.json 中配置了正確的 MySQL 資料庫連接字串。如下所示：
+```json
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=localhost;Database=todolist;User Id=your_username;Password=your_password;"
+  }
+}
+
+### 5.
+```bash
+dotnet build
+dotnet run
