@@ -1,3 +1,5 @@
+using System;
+
 namespace todolist.Helpers
 {
     public static class PriorityHelper
@@ -6,9 +8,10 @@ namespace todolist.Helpers
         {
             return priority switch
             {
-                "High" => "red",
+                "Low" => "blue",
                 "Medium" => "orange",
-                "Low"=> "green",
+                "High" => "red",
+                _ => "black" // 預設情況，處理未涵蓋的值
             };
         }
     }
